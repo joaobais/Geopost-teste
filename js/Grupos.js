@@ -14,24 +14,18 @@ const selecoesSorteadas = [];
 
 /*function randomizeTeams() {
   for (i = 0; i < grupoA.length; i++) {
-    const selecaoSorteada = Math.floor(Math.random() * grupoA.length);
+    let selecaoSorteada = Math.floor(Math.random() * grupoA.length);
     const selecao = grupoA[selecaoSorteada];
 
     while (selecoesSorteadas.includes(selecao)) {
-      //const selecaoSorteada = Math.floor(Math.random() * grupoA.length);
-      //const selecao = grupoA[selecaoSorteada];
+      let selecaoSorteada = Math.floor(Math.random() * grupoA.length);
+      const selecao = grupoA[selecaoSorteada];
 
-      //timesContainer.innerHTML += `${selecao} `;
+      timesContainer.innerHTML += `${selecao} `;
       console.log(`repetiu`);
     }
     timesContainer.innerHTML += `${selecao}-`;
     selecoesSorteadas.push(selecaoSorteada);
     console.log(selecoesSorteadas);
   }
-}
-
-
-while (selecoesSorteadas.length < 7) {
-    for (i = 0; i < grupoA.length; i++)
-
-}*/
+} */
