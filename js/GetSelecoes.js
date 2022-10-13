@@ -1,3 +1,4 @@
+let selecoesSorteadasNome = [];
 function httpGetAsync() {
   var jobendpoint = "https://estagio.geopostenergy.com/WorldCup/GetAllTeams";
   var http = new XMLHttpRequest();
@@ -15,7 +16,11 @@ function httpGetAsync() {
     }
   };
   joblist = JSON.parse(joblist);
-  console.log(joblist.Result[0].Name);
-
+  
+  for (i = 0; i < 32; i++) { 
+    selecoesSorteadasNome.push(joblist.Result[i].Name)
+}
   return joblist;
 }
+
+httpGetAsync()
