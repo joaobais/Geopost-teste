@@ -42,6 +42,7 @@ function randomizeTeams() {
     selecoesSorteadasNome.Result[i].SaldoDeGols = 0;
     selecoesSorteadasNome.Result[i].Empates = 0;
     selecoesSorteadasNome.Result[i].Vitorias = 0;
+    selecoesSorteadasNome.Result[i].Grupo;
     selecoesSorteadasNome.Result[i].ContarVitoria = function () {
       return this.Vitorias++;
     };
@@ -69,27 +70,35 @@ function randomizeTeams() {
 function randomizeGroups(listaDeSelecoes) {
   for (i = 0; i < 4; i++) {
     grupoA.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `A`
   }
   for (i = 4; i < 8; i++) {
     grupoB.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `B`
   }
   for (i = 8; i < 12; i++) {
     grupoC.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `C`
   }
   for (i = 12; i < 16; i++) {
     grupoD.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `D`
   }
   for (i = 16; i < 20; i++) {
     grupoE.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `E`
   }
   for (i = 20; i < 24; i++) {
     grupoF.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `F`
   }
   for (i = 24; i < 28; i++) {
     grupoG.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `G`
   }
   for (i = 28; i < 32; i++) {
     grupoH.push(listaDeSelecoes[i].Name);
+    selecoesSorteadasNome.Result[i].Grupo = `H`
   }
 
   grupos.push(
@@ -262,30 +271,42 @@ function tabelaClassificatoria() {
     selecoesSorteadasNome.Result[i].ContarPontos();
     i++;
   });
+  //aqui precisa de um loop de 4 em 4, que ordena os pontos de maior para menor, tira as 4 equipes e repeat
 
-  var primeiroColado = `Brasil`;
-  var segundoColado = `Argentina`;
-  var terceiroColado = `Alemenha`;
-  var quartoColado = `Belgica`;
+  for (var i = 0; i < 4; i++){
+
+  }
+  var primeiroColado = selecoesSorteadasNome.Result[0];
+  var segundoColado = selecoesSorteadasNome.Result[1];
+  var terceiroColado = selecoesSorteadasNome.Result[2];
+  var quartoColado = selecoesSorteadasNome.Result[3];
   
 
 
   grupos.forEach((element) => {
-    TabelaClassificatoria.innerHTML += `<tbody className="TabelaFiller"<tr><th>${element.nome}</th><th>Pontos</th><th>Saldo de Gols</th></tr></tbody>`;
-    TabelaClassificatoria.innerHTML += `<tr>
-                                <td>${primeiroColado}</td><td>${primeiroColado.Pontos}</td><td${primeiroColado.Pontos}<td>
-                                </tr>
-                                <tr>
-                                <td>${segundoColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
-                                </tr>
-                                <tr>
-                                <td>${terceiroColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
-                                </tr>
-                                <tr>
-                                <td>${quartoColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
-                            </tr>`;
-  });
+    selecoesSorteadasNome.Result.forEach((time) => {
+      console.log(time)
+        if (this.time.Grupo === time.Grupo){
 
+    }
+    });
+   
+    TabelaClassificatoria.innerHTML += `<tbody className="TabelaFiller"<tr><th>${element.nome}</th><th>Pontos</th><th>Saldo de Gols</th></tr></tbody>`;
+    TabelaClassificatoria.innerHTML += `
+                                <tr>
+                                  <td>${primeiroColado.Name}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.SaldoDeGols}<td>
+                                </tr>
+                                <tr>
+                                  <td>${segundoColado.Name}</td><td>${segundoColado.Pontos}</td><td>${segundoColado.SaldoDeGols}<td>
+                                </tr>
+                                <tr>
+                                  <td>${terceiroColado.Name}</td><td>${terceiroColado.Pontos}</td><td>${terceiroColado.SaldoDeGols}<td>
+                                </tr>
+                                <tr>
+                                  <td>${quartoColado.Name}</td><td>${quartoColado.Pontos}</td><td>${quartoColado.SaldoDeGols}<td>
+                                </tr>`;
+  });
+console.log(primeiroColado.SaldoDeGols)
   
 
   //console.log(selecoesSorteadasNome.Result);
