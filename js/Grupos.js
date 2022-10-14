@@ -1,12 +1,26 @@
 //Grupos e Seleções
 const timesContainer = document.getElementById("timesContainer");
 const TabelaGrupoFases = document.getElementById("TabelaGrupoFases");
+const TabelaClassificatoria = document.getElementById("TabelaClassificatoria");
+const TabelaFiller = document.getElementsByClassName("TabelaFiller");
 const TabelaFaseDeGrupos =
   document.getElementsByClassName("TabelaFaseDeGrupos");
+
+let colocados = []
+
 let todasSelecoes = [];
 const selecoesSorteadas = [];
 let grupos = [];
-//let GruposTeste = ["Grupo A","Grupo B","Grupo C","Grupo D","Grupo E","Grupo F","Grupo G","Grupo H"]
+let GruposTeste = [
+  "Grupo A",
+  "Grupo B",
+  "Grupo C",
+  "Grupo D",
+  "Grupo E",
+  "Grupo F",
+  "Grupo G",
+  "Grupo H",
+];
 selecoesSorteadasNome = httpGetAsync();
 todasSelecoes = httpGetAsync();
 const grupoA = [];
@@ -29,24 +43,25 @@ function randomizeTeams() {
     selecoesSorteadasNome.Result[i].Empates = 0;
     selecoesSorteadasNome.Result[i].Vitorias = 0;
     selecoesSorteadasNome.Result[i].ContarVitoria = function () {
-      return this.Vitorias ++;
+      return this.Vitorias++;
     };
     selecoesSorteadasNome.Result[i].ContarEmpate = function () {
-      return this.Empates ++;
+      return this.Empates++;
     };
-    selecoesSorteadasNome.Result[i].ContarSaldoDeGols = function(valor) {
-      return this.SaldoDeGols += valor;
+    selecoesSorteadasNome.Result[i].ContarSaldoDeGols = function (valor) {
+      return (this.SaldoDeGols += valor);
     };
-    selecoesSorteadasNome.Result[i].ContarPontos = function(){
-      pontosTotal = this.Empates *pontosEmpate + this.Vitorias * pontosVitoria 
-      return pontosTotal
-    }
+    selecoesSorteadasNome.Result[i].ContarPontos = function () {
+      pontosTotal = this.Empates * pontosEmpate + this.Vitorias * pontosVitoria;
+      return (this.Pontos += pontosTotal);
+    };
     i++;
   });
-  selecoesSorteadasNome.Result = selecoesSorteadasNome.Result.sort(() => Math.random() - 0.5);
+  selecoesSorteadasNome.Result = selecoesSorteadasNome.Result.sort(
+    () => Math.random() - 0.5
+  );
 
-
-  console.log(selecoesSorteadasNome);
+  //console.log(selecoesSorteadasNome);
   randomizeGroups(selecoesSorteadasNome.Result);
 
   //document.getElementById("btnRandomize").disabled = true;
@@ -132,11 +147,11 @@ function randomizeGroups(listaDeSelecoes) {
 
 function simulaCampeonato(lista) {
   //console.log(lista)
-  var indice = 0
+  var indice = 0;
   grupos.forEach((element) => {
     TabelaGrupoFases.innerHTML += `<tbody ><tr ><th class="TabelaDeGrupos">${element.nome} </th></tr>
     <tr class="TabelaFaseDeGrupos"></tr></tbody>`;
-    
+
     //for (var j = 0; j< 4; j += 3) {
     for (var i = 0; i < 3; i++) {
       var primeiroTime = lista[0 + indice];
@@ -147,26 +162,25 @@ function simulaCampeonato(lista) {
       if (primeiroResultado > segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarVitoria()
-        
+        primeiroTime.ContarVitoria();
       } else if (primeiroResultado === segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarEmpate()
-        segundoTime.ContarEmpate()
+        primeiroTime.ContarEmpate();
+        segundoTime.ContarEmpate();
       } else if (primeiroResultado < segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        segundoTime.ContarVitoria()
+        segundoTime.ContarVitoria();
       }
       TabelaGrupoFases.innerHTML += `</tr>
     <td> ${primeiroTime.Name} x ${segundoTime.Name} </td>
     <td> ${primeiroResultado} x ${segundoResultado}</td>`;
     }
-  
-        //lista.shift()
-        //lista.shift()
-  
+
+    //lista.shift()
+    //lista.shift()
+
     for (var i = 0; i < 2; i++) {
       var primeiroTime = lista[1 + indice];
       var segundoTime = lista[i + 2 + indice];
@@ -175,17 +189,16 @@ function simulaCampeonato(lista) {
       if (primeiroResultado > segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarVitoria()
-        
+        primeiroTime.ContarVitoria();
       } else if (primeiroResultado === segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarEmpate()
-        segundoTime.ContarEmpate()
+        primeiroTime.ContarEmpate();
+        segundoTime.ContarEmpate();
       } else if (primeiroResultado < segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        segundoTime.ContarVitoria()
+        segundoTime.ContarVitoria();
       }
       TabelaGrupoFases.innerHTML += `</tr>
     <td> ${primeiroTime.Name} x ${segundoTime.Name} </td>
@@ -201,17 +214,16 @@ function simulaCampeonato(lista) {
       if (primeiroResultado > segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarVitoria()
-        
+        primeiroTime.ContarVitoria();
       } else if (primeiroResultado === segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        primeiroTime.ContarEmpate()
-        segundoTime.ContarEmpate()
+        primeiroTime.ContarEmpate();
+        segundoTime.ContarEmpate();
       } else if (primeiroResultado < segundoResultado) {
         primeiroTime.ContarSaldoDeGols(primeiroResultado);
         segundoTime.ContarSaldoDeGols(segundoResultado);
-        segundoTime.ContarVitoria()
+        segundoTime.ContarVitoria();
       }
       //console.log(lista)
       TabelaGrupoFases.innerHTML += `</tr>
@@ -219,7 +231,7 @@ function simulaCampeonato(lista) {
     <td> ${primeiroResultado} x ${segundoResultado}</td>`;
     }
 
-    indice+=4
+    indice += 4;
     //lista.shift();
   });
 }
@@ -229,3 +241,52 @@ function simulaCampeonato(lista) {
   <td>oi</td>
   </tr>`
  */
+  function defineTabela(){
+    console.log(selecoesSorteadasNome.Result)
+    colocados = selecoesSorteadasNome.Result
+    /*for (var i = 0; i < 4; i++) {
+       
+       
+       
+       //[i].Pontos.sort(function(a, b){
+        //return b - a;
+    }/*);
+      
+    }*/
+    //console.log(colocados)
+  }
+
+function tabelaClassificatoria() {
+  var i = 0;
+  selecoesSorteadasNome.Result.forEach((element) => {
+    selecoesSorteadasNome.Result[i].ContarPontos();
+    i++;
+  });
+
+  var primeiroColado = `Brasil`;
+  var segundoColado = `Argentina`;
+  var terceiroColado = `Alemenha`;
+  var quartoColado = `Belgica`;
+  
+
+
+  grupos.forEach((element) => {
+    TabelaClassificatoria.innerHTML += `<tbody className="TabelaFiller"<tr><th>${element.nome}</th><th>Pontos</th><th>Saldo de Gols</th></tr></tbody>`;
+    TabelaClassificatoria.innerHTML += `<tr>
+                                <td>${primeiroColado}</td><td>${primeiroColado.Pontos}</td><td${primeiroColado.Pontos}<td>
+                                </tr>
+                                <tr>
+                                <td>${segundoColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
+                                </tr>
+                                <tr>
+                                <td>${terceiroColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
+                                </tr>
+                                <tr>
+                                <td>${quartoColado}</td><td>${primeiroColado.Pontos}</td><td>${primeiroColado.Pontos}<td>
+                            </tr>`;
+  });
+
+  
+
+  //console.log(selecoesSorteadasNome.Result);
+}

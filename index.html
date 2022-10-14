@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Copa Geopost</title>
     <script src="js/GetSelecoes.js"></script>
-    <script src="js/Pontos.js"></script>
-    <script src="js/TabaleClassificatoria.js"></script>
+    <script src="js/Pontos.js" defer></script>
     <script src="js/Grupos.js" defer></script>
+    <script src="js/TabaleClassificatoria.js" defer></script>
 
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body onload="randomizeTeams()">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body onload="randomizeTeams()">
     <main>
-        <button id="btnRandomize" onclick="">Randomizar</button>
-        <div id="TabelasContainer">
-            <div id="timesContainer"></div>
-        <table id="TabelaGrupoFasesContainer" >
-                <tr>
-                  <th>Seleções</th>
-                  <th>Placar</th>
-                </tr>
-                <tbody id="TabelaGrupoFases"></tbody>
+      <button id="btnRandomize" onclick="">Randomizar</button>
+      <div id="TabelasContainer">
+        <div id="timesContainer"></div>
+        <table id="TabelaGrupoFasesContainer">
+          <tr>
+            <th>Seleções</th>
+            <th>Placar</th>
+          </tr>
+          <tbody id="TabelaGrupoFases"></tbody>
         </table>
 
         <table id="TabelaClassificatoria">
-            <tr>
-                <th>Seleções</th>
-                <th>Pontos</th>
-                <th>Saldo de Gols   </th>
-            </tr>
+          <tr>
+            <th>Seleções</th>
+          </tr>
         </table>
-        </div>
+      </div>
     </main>
-    
-</body>
+  </body>
 </html>
