@@ -1,9 +1,11 @@
 //Grupos e Seleções
 const timesContainer = document.getElementById("timesContainer");
 const TabelaGrupoFases = document.getElementById("TabelaGrupoFases");
+const TabelaFaseDeGrupos = document.getElementsByClassName("TabelaFaseDeGrupos")
 const todasSelecoes = [];
 const selecoesSorteadas = [];
 let grupos = [];
+let GruposTeste = ["GrupoA","GrupoB","GrupoC","GrupoD","GrupoE","GrupoF","GrupoG","GrupoH"]
 selecoesSorteadasNome = httpGetAsync();
 
 const grupoA = [];
@@ -30,7 +32,7 @@ function randomizeTeams() {
   selecoesSorteadasNome.Result = selecoesSorteadasNome.Result.sort(
     () => Math.random() - 0.5
   );
-  console.log(selecoesSorteadasNome.Result)
+  //console.log(selecoesSorteadasNome)
   randomizeGroups(selecoesSorteadasNome.Result);
   
   //document.getElementById("btnRandomize").disabled = true;
@@ -111,58 +113,65 @@ function randomizeGroups(listaDeSelecoes) {
     .join("")}
   </table>`;
   //console.log(grupos);
-  simulaCampeonato();
+  simulaCampeonato(selecoesSorteadasNome.Result);
 }
 
-function simulaCampeonato() {
+function simulaCampeonato(lista) {
   var vitoriaPrimeiro = 0;
   var vitoriaSegunda = 0;
   var empate = 0;
-
+  console.log(lista)
   grupos.forEach((element) => {
-    TabelaGrupoFases.innerHTML += `<th>${element.nome} </th>`;
-
+    TabelaGrupoFases.innerHTML += `<table><tr><th>${element.nome} </th></tr>
+    <tr class="TabelaFaseDeGrupos"></tr><table>`;
     for (var i = 0; i < 3; i++) {
-      var primeiroTime = element.times[0];
-      var segundoTime = element.times[i + 1];
+      var primeiroTime = element[0];
+      var segundoTime = element[i + 1];
       var primeiroResultado = Math.floor(Math.random() * 10);
       var segundoResultado = Math.floor(Math.random() * 10);
       var saldoGolsPrimeiro = 0;
       var saldoGolsSegundo = 0;
-      if (primeiroResultado > segundoResultado) {
-        element.SaldoDeGols += 2301203 
-        segundoTime.SaldoDeGols += saldoGolsSegundo;
-        console.log(element)
-        
-      } else if (primeiroResultado == segundoResultado) {
-        primeiroTime.SaldoDeGols += saldoGolsPrimeiro;
-        segundoTime.SaldoDeGols += saldoGolsSegundo;
-        console.log(primeiroResultado, segundoResultado);
-      } else {
-        console.log(primeiroResultado, segundoResultado);
-      }
+    }
+    if (primeiroResultado > segundoResultado) {
+      //primeiroTime.SaldoDeGols += primeiroResultado 
+      //segundoTime.SaldoDeGols += saldoGolsSegundo;
+      console.log(element)
+      
+    } else if (primeiroResultado == segundoResultado) {
+      //primeiroTime.SaldoDeGols += saldoGolsPrimeiro;
+      //segundoTime.SaldoDeGols += saldoGolsSegundo;
+      console.log(primeiroResultado, segundoResultado);
+    } else {
+      console.log(primeiroResultado, segundoResultado);
+    }
 
-      TabelaGrupoFases.innerHTML += `</tr>
-      <td> ${primeiroTime} x ${segundoTime} </td>
-      <td> ${primeiroResultado}x${segundoResultado}</td>`;
-    }
-    for (var i = 0; i < 2; i++) {
-      var primeiroTime = element.times[1];
-      var segundoTime = element.times[i + 2];
-      TabelaGrupoFases.innerHTML += `</tr>
-      <td> ${primeiroTime} x ${segundoTime} </td>
-      <td> ${Math.floor(Math.random() * 10)}x${Math.floor(
-        Math.random() * 10
-      )}</td>`;
-    }
-    for (var i = 0; i < 1; i++) {
-      var primeiroTime = element.times[2];
-      var segundoTime = element.times[3];
-      TabelaGrupoFases.innerHTML += `</tr>
-      <td> ${primeiroTime} x ${segundoTime} </td>
-      <td>${Math.floor(Math.random() * 10)}x${Math.floor(
-        Math.random() * 10
-      )}</td>`;
-    }
-  });
-}
+    TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime} x ${segundoTime} </td>
+    <td> ${primeiroResultado}x${segundoResultado}</td>`;
+  for (var i = 0; i < 2; i++) {
+    var primeiroTime = element.times[1];
+    var segundoTime = element.times[i + 2];
+    TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime} x ${segundoTime} </td>
+    <td> ${Math.floor(Math.random() * 10)}x${Math.floor(
+      Math.random() * 10
+    )}</td>`;
+  }
+  for (var i = 0; i < 1; i++) {
+    var primeiroTime = element.times[2];
+    var segundoTime = element.times[3];
+    TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime} x ${segundoTime} </td>
+    <td>${Math.floor(Math.random() * 10)}x${Math.floor(
+      Math.random() * 10
+    )}</td>`;
+  }
+})}
+
+/*function criaTabela() {
+  TabelaFaseDeGrupos.innerHTML = `<tr>
+  <td>oi</td>
+  </tr>`
+ */
+
+
