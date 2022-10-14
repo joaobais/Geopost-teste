@@ -1,13 +1,14 @@
 //Grupos e Seleções
 const timesContainer = document.getElementById("timesContainer");
 const TabelaGrupoFases = document.getElementById("TabelaGrupoFases");
-const TabelaFaseDeGrupos = document.getElementsByClassName("TabelaFaseDeGrupos")
-const todasSelecoes = [];
+const TabelaFaseDeGrupos =
+  document.getElementsByClassName("TabelaFaseDeGrupos");
+let todasSelecoes = [];
 const selecoesSorteadas = [];
 let grupos = [];
-let GruposTeste = ["GrupoA","GrupoB","GrupoC","GrupoD","GrupoE","GrupoF","GrupoG","GrupoH"]
+//let GruposTeste = ["Grupo A","Grupo B","Grupo C","Grupo D","Grupo E","Grupo F","Grupo G","Grupo H"]
 selecoesSorteadasNome = httpGetAsync();
-
+todasSelecoes = httpGetAsync();
 const grupoA = [];
 const grupoB = [];
 const grupoC = [];
@@ -27,14 +28,27 @@ function randomizeTeams() {
     selecoesSorteadasNome.Result[i].SaldoDeGols = 0;
     selecoesSorteadasNome.Result[i].Empates = 0;
     selecoesSorteadasNome.Result[i].Vitorias = 0;
+    selecoesSorteadasNome.Result[i].ContarVitoria = function () {
+      return this.Vitorias ++;
+    };
+    selecoesSorteadasNome.Result[i].ContarEmpate = function () {
+      return this.Empates ++;
+    };
+    selecoesSorteadasNome.Result[i].ContarSaldoDeGols = function(valor) {
+      return this.SaldoDeGols += valor;
+    };
+    selecoesSorteadasNome.Result[i].ContarPontos = function(){
+      pontosTotal = this.Empates *pontosEmpate + this.Vitorias * pontosVitoria 
+      return pontosTotal
+    }
     i++;
   });
-  selecoesSorteadasNome.Result = selecoesSorteadasNome.Result.sort(
-    () => Math.random() - 0.5
-  );
-  //console.log(selecoesSorteadasNome)
+  selecoesSorteadasNome.Result = selecoesSorteadasNome.Result.sort(() => Math.random() - 0.5);
+
+
+  console.log(selecoesSorteadasNome);
   randomizeGroups(selecoesSorteadasNome.Result);
-  
+
   //document.getElementById("btnRandomize").disabled = true;
 }
 function randomizeGroups(listaDeSelecoes) {
@@ -117,61 +131,101 @@ function randomizeGroups(listaDeSelecoes) {
 }
 
 function simulaCampeonato(lista) {
-  var vitoriaPrimeiro = 0;
-  var vitoriaSegunda = 0;
-  var empate = 0;
-  console.log(lista)
+  //console.log(lista)
+  var indice = 0
   grupos.forEach((element) => {
-    TabelaGrupoFases.innerHTML += `<table><tr><th>${element.nome} </th></tr>
-    <tr class="TabelaFaseDeGrupos"></tr><table>`;
+    TabelaGrupoFases.innerHTML += `<tbody ><tr ><th class="TabelaDeGrupos">${element.nome} </th></tr>
+    <tr class="TabelaFaseDeGrupos"></tr></tbody>`;
+    
+    //for (var j = 0; j< 4; j += 3) {
     for (var i = 0; i < 3; i++) {
-      var primeiroTime = element[0];
-      var segundoTime = element[i + 1];
+      var primeiroTime = lista[0 + indice];
+      var segundoTime = lista[i + 1 + indice];
       var primeiroResultado = Math.floor(Math.random() * 10);
       var segundoResultado = Math.floor(Math.random() * 10);
-      var saldoGolsPrimeiro = 0;
-      var saldoGolsSegundo = 0;
+
+      if (primeiroResultado > segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarVitoria()
+        
+      } else if (primeiroResultado === segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarEmpate()
+        segundoTime.ContarEmpate()
+      } else if (primeiroResultado < segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        segundoTime.ContarVitoria()
+      }
+      TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime.Name} x ${segundoTime.Name} </td>
+    <td> ${primeiroResultado} x ${segundoResultado}</td>`;
     }
-    if (primeiroResultado > segundoResultado) {
-      //primeiroTime.SaldoDeGols += primeiroResultado 
-      //segundoTime.SaldoDeGols += saldoGolsSegundo;
-      console.log(element)
-      
-    } else if (primeiroResultado == segundoResultado) {
-      //primeiroTime.SaldoDeGols += saldoGolsPrimeiro;
-      //segundoTime.SaldoDeGols += saldoGolsSegundo;
-      console.log(primeiroResultado, segundoResultado);
-    } else {
-      console.log(primeiroResultado, segundoResultado);
+  
+        //lista.shift()
+        //lista.shift()
+  
+    for (var i = 0; i < 2; i++) {
+      var primeiroTime = lista[1 + indice];
+      var segundoTime = lista[i + 2 + indice];
+      var primeiroResultado = Math.floor(Math.random() * 10);
+      var segundoResultado = Math.floor(Math.random() * 10);
+      if (primeiroResultado > segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarVitoria()
+        
+      } else if (primeiroResultado === segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarEmpate()
+        segundoTime.ContarEmpate()
+      } else if (primeiroResultado < segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        segundoTime.ContarVitoria()
+      }
+      TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime.Name} x ${segundoTime.Name} </td>
+    <td> ${primeiroResultado} x ${segundoResultado}</td>`;
+    }
+    //lista.shift();
+
+    for (var i = 0; i < 1; i++) {
+      var primeiroTime = lista[2 + indice];
+      var segundoTime = lista[3 + indice];
+      var primeiroResultado = Math.floor(Math.random() * 10);
+      var segundoResultado = Math.floor(Math.random() * 10);
+      if (primeiroResultado > segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarVitoria()
+        
+      } else if (primeiroResultado === segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        primeiroTime.ContarEmpate()
+        segundoTime.ContarEmpate()
+      } else if (primeiroResultado < segundoResultado) {
+        primeiroTime.ContarSaldoDeGols(primeiroResultado);
+        segundoTime.ContarSaldoDeGols(segundoResultado);
+        segundoTime.ContarVitoria()
+      }
+      //console.log(lista)
+      TabelaGrupoFases.innerHTML += `</tr>
+    <td> ${primeiroTime.Name} x ${segundoTime.Name} </td>
+    <td> ${primeiroResultado} x ${segundoResultado}</td>`;
     }
 
-    TabelaGrupoFases.innerHTML += `</tr>
-    <td> ${primeiroTime} x ${segundoTime} </td>
-    <td> ${primeiroResultado}x${segundoResultado}</td>`;
-  for (var i = 0; i < 2; i++) {
-    var primeiroTime = element.times[1];
-    var segundoTime = element.times[i + 2];
-    TabelaGrupoFases.innerHTML += `</tr>
-    <td> ${primeiroTime} x ${segundoTime} </td>
-    <td> ${Math.floor(Math.random() * 10)}x${Math.floor(
-      Math.random() * 10
-    )}</td>`;
-  }
-  for (var i = 0; i < 1; i++) {
-    var primeiroTime = element.times[2];
-    var segundoTime = element.times[3];
-    TabelaGrupoFases.innerHTML += `</tr>
-    <td> ${primeiroTime} x ${segundoTime} </td>
-    <td>${Math.floor(Math.random() * 10)}x${Math.floor(
-      Math.random() * 10
-    )}</td>`;
-  }
-})}
+    indice+=4
+    //lista.shift();
+  });
+}
 
 /*function criaTabela() {
   TabelaFaseDeGrupos.innerHTML = `<tr>
   <td>oi</td>
   </tr>`
  */
-
-

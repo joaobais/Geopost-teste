@@ -1,4 +1,26 @@
-//import {Selecao} from = "C:\Users\joaob\OneDrive\Desktop\Dev\Projetos\Geopost teste\Geopost-teste\js\models\Selecao.js"
+class Selecao {
+  Name;
+  Vitorias = 0;
+  Empates = 0;
+  Pontos = 0;
+  SaldoDeGols = 0;
+
+  constructor(name){
+    this.Name = name
+  }
+
+  vencer() {
+    this.Vitorias++;
+  }
+
+  saldarGols(valor) {
+    this.SaldoDeGols += valor;
+  }
+
+  pontuar() {
+    this.Pontos = this.Empates * pontosEmpate + this.Vitorias * pontosVitoria;
+  }}
+var SelecoesGrupo = [`time1`, `time2`, `time3`, `time4`, `time5`, `time6`, `time7`, `time8`, `time9`, `time10`, `time11`, `time12`, `time13`, `time14`, `time15`, `time16`, `time17`, `time18`, `time19`, `time20`, `time21`, `time22`, `time23`, `time24`, `time25`, `time26`, `time27`, `time28`, `time29`, `time30`, `time31`, `time32`]
 let SelecoesNome = [];
 function httpGetAsync() {
   var jobendpoint = "https://estagio.geopostenergy.com/WorldCup/GetAllTeams";
@@ -12,25 +34,33 @@ function httpGetAsync() {
   http.onreadystatechange = function () {
     //Call a function when the state changes.
     if (http.readyState === XMLHttpRequest.DONE && http.status == 200) {
-      //joblist = http.responseType["json"];
+      joblist = http.responseType["json"];
       joblist = http.responseText;
     }
   };
   joblist = JSON.parse(joblist);
-  /*for (i = 0; i < 32; i++) {
-    SelecoesNome.push(joblist.Result[i].Name)
-  }
 
-  for (i = 0; i < 32; i++) {
-    SelecoesNome[i] = new Selecao (
-      SelecoesNome[i].Token = joblist.Result[i].Token,
-      joblist.Result[i].Name = joblist.Result[i].Name,
-      SelecoesNome[i].Vitorias = 0,
-      SelecoesNome[i].Empates= 0,
-      SelecoesNome[i].Pontos=0,
-      SelecoesNome[i].SaldoDeGols=0
-    )
+  
+ 
+    SelecoesNome = joblist.Result
+    
+    /*for (i = 0; i < 32; i++) {
+      `time${[i]}` = new Selecao(`${SelecoesNome[i].Token}`, `${SelecoesNome[i].Name}`)
+     }*/
+  
+    
+  /*for (i = 0; i < 3; i++) {
+     new Selecao (
+      Selecao.Token = SelecoesNome[i].Token,
+      Selecao.Name = SelecoesNome[i].Name
+    ) 
   }*/
-
-  return joblist;
+  /*var i = 0
+  SelecoesNome.forEach(element => {
+    SelecoesGrupo[i] = new Selecao(SelecoesNome[i].Name)  
+     i++  
+  });*/
+  return joblist
 }
+
+

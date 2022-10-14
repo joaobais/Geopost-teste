@@ -1,0 +1,15 @@
+#TabelasContainer {
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+align-content: center;
+}
+
+#TabelaGrupoFasesContainer {
+    padding: 20px;
+
+}
+
+#TabelaClassificatoria{  
+    padding: 20px;
+}
